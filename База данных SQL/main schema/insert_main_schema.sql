@@ -32,3 +32,34 @@ select distinct *
 			  from sources.top250)
 		);
 
+insert into main.actors(actor)
+select distinct *
+	from (
+		select starring
+		from (select regexp_split_to_table(
+			  replace(replace(replace(starring, '[', ''), ']', ''), '''', ''),
+			  ', ') 
+			  as starring
+			  from sources.top100_kp)
+		union
+		select starring
+		from (select regexp_split_to_table(
+			  replace(replace(replace(starring, '[', ''), ']', ''), '''', ''),
+			  ', ') 
+			  as starring
+			  from sources.top500_kp)
+		);
+
+insert into main.directors(director)
+select distinct * 
+	from (
+		select director
+		from sources.top100_kp
+		union
+		select director
+		from sources.top500_kp
+		);
+		
+insert into main.sources(source)
+values ('KinoPoisk'),
+	('Mail.ru');

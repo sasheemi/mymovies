@@ -1,5 +1,7 @@
+create schema main
+
 create table main.directors(
-	director_id int primary key,
+	director_id serial primary key,
 	director text);
 
 create table main.movies(
