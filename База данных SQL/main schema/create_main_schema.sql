@@ -5,12 +5,12 @@ create table main.directors(
 	director text);
 
 create table main.movies(
-	movie_id int primary key,
+	movie_id serial primary key,
 	ru_name text, 
 	en_name text,
 	year int,
 	length int,
-	rating int,
+	rating real,
 	director_id int,
 	foreign key (director_id) 
 		references main.directors(director_id) 
